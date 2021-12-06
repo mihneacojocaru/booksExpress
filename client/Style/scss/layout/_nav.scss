@@ -1,0 +1,47 @@
+nav{
+    background-color: rgb(189, 93, 56);
+    color: white;
+
+    @include flexy($just: center, $dir:column);
+    
+
+    .title-img{
+        background-color: rgb(187, 112, 82);
+        width: 10em;
+        height: 10em;
+        margin: 0 auto;
+        position: relative;
+        border-radius: 50%;
+        img{
+            border-radius: 50%;
+            width: 9em;
+            height: 9em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    }
+
+    h1{
+        text-align: center;
+    }
+    a{
+        color: white;
+    }
+    ul > li{
+        text-align: center;
+        margin: 0 auto;
+        padding: .5em;
+        font-size: 1.5em;
+        &:hover{
+            background-color: rgb(187, 112, 82);
+            cursor: pointer;
+        }
+        &:active{
+            background-color: rgb(189, 93, 56);
+        }
+    }
+
+    
+}

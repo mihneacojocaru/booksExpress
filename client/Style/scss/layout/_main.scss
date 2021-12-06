@@ -1,0 +1,7 @@
+main{
+    background-color: rgb(250, 237, 239);
+    min-height: 100vh;
+
+    @include flexy($just: center, $dir: column);
+    padding-left: 2em;
+}

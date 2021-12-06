@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    position: relative;
+}
+
+body{
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr);
+    grid-template-rows: 1fr;
+    font-family: $font-stack-primary;
+    @include mq("sm"){
+        grid-template-areas: "nav" 
+                             "main";
+    }
+
+    @include mq("lg"){
+        grid-template-columns: 300px 1fr;
+        grid-template-areas: "nav main";
+    }
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+
+
