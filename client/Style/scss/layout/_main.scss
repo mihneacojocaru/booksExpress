@@ -2,6 +2,11 @@ main{
     background-color: rgb(250, 237, 239);
     min-height: 100vh;
 
-    @include flexy($just: center, $dir: column);
+    @include flexy($just: start, $dir: column);
     padding-left: 2em;
+
+    @include mq("lg"){  
+        justify-content: center;
+    }
+
 }

@@ -6,6 +6,7 @@ nav{
     
 
     .title-img{
+        display: none;
         background-color: rgb(187, 112, 82);
         width: 10em;
         height: 10em;
@@ -24,8 +25,9 @@ nav{
     }
 
     h1{
-        text-align: center;
+        padding-left: .4em;
     }
+   
     a{
         color: white;
     }
@@ -43,5 +45,47 @@ nav{
         }
     }
 
-    
+    .toggle-btn{
+        position: absolute;
+        top: 1.75em;
+        right: 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+
+        .bar{
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+        }
+    }
+
+    .nav-items{
+        display: none;
+    }
+
+    .active{
+        display: block;
+    }
+
+    @include mq("lg"){
+        .toggle-btn{
+            display: none;
+        }
+        h1{
+            text-align: center;
+            padding-left: 0px;
+        }
+        .title-img{
+            display: block;
+        }
+
+        .nav-items{
+            display: block;
+        }
+    }
 }
+

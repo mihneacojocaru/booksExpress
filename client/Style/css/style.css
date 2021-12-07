@@ -389,6 +389,7 @@ nav {
   justify-content: center;
 }
 nav .title-img {
+  display: none;
   background-color: #bb7052;
   width: 10em;
   height: 10em;
@@ -406,7 +407,7 @@ nav .title-img img {
   transform: translate(-50%, -50%);
 }
 nav h1 {
-  text-align: center;
+  padding-left: 0.4em;
 }
 nav a {
   color: white;
@@ -424,14 +425,56 @@ nav ul > li:hover {
 nav ul > li:active {
   background-color: #bd5d38;
 }
+nav .toggle-btn {
+  position: absolute;
+  top: 1.75em;
+  right: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+}
+nav .toggle-btn .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+}
+nav .nav-items {
+  display: none;
+}
+nav .active {
+  display: block;
+}
+@media (min-width: 1024px) {
+  nav .toggle-btn {
+    display: none;
+  }
+  nav h1 {
+    text-align: center;
+    padding-left: 0px;
+  }
+  nav .title-img {
+    display: block;
+  }
+  nav .nav-items {
+    display: block;
+  }
+}
 
 main {
   background-color: #faedef;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   padding-left: 2em;
+}
+@media (min-width: 1024px) {
+  main {
+    justify-content: center;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
