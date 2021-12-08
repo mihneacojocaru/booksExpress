@@ -1,17 +1,43 @@
-import { getBooks, saveBook } from "./repository.js";
+import express from "express";
+import cors from "cors";
+import { getBooks } from "./repository.js";
+
+const app = express();
 
 
 
-// getBooks().then(e=>e.forEach(element => {
-//     console.log(element);
-// }));
-
-const newBook = {
-    "id": 51,
-    "book_title": "Test Title",
-    "author": 'John Doe',
-    "release_date": '12/12/2000',
-    "isbn_no": '123412345-T'
-};
+const port = 3000;
 
 
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
+app.use(cors());
+
+
+app.get("/books", async (req,res) => {
+    try{
+    let books= await getBooks();
+    res.status(200).json(books);
+    }catch(e){
+        res.status(500).json({message:e.message});
+    }
+})
+
+//+++ crud
+
+app.post('/postNewBook',(req,res)=>{
+    
+    let book = req.body;
+
+    console.log(book);
+
+    
+
+    res.json("Success");
+
+
+});
+
+
+
+app.listen(port, ()=>console.log("Listening on port " + port));
