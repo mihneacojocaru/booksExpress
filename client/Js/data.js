@@ -19,6 +19,7 @@ export default class Data {
         if (body != null) {
 
             options.body = JSON.stringify(body);
+
         }
 
         return fetch(url, options);
@@ -33,6 +34,7 @@ export default class Data {
             if (response.status === 200) {
 
                 return response.json();
+                
             } else {
 
                 return Promise.reject("error");
@@ -43,13 +45,15 @@ export default class Data {
             return Promise.reject("error");
         }
 
-
     }
 
+    async deleteBookApi(id){
 
-
-
-
-
-
+        try {
+            const response = await this.api(`http://localhost:3000/deleteBook/${id}`,'DELETE');
+            return response.json();
+        } catch (error) {
+           return Promise.reject(error); 
+        }
+    }
 }
