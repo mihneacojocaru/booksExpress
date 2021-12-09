@@ -5,7 +5,3 @@ import Data from "./data.js";
 
 const home = new ViewHome();
 toggleMenu();
-
-// books.forEach(element => {
-//     home.addBooksToPage(element);
-// });

@@ -476,7 +476,7 @@ nav .active {
 main {
   background-color: #faedef;
   min-height: 100vh;
-  padding: 1em 0.4em 0;
+  padding: 1em 0.4em;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -595,6 +595,10 @@ input[type=submit]:active {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+}
+
+.updateInput {
+  max-width: 350px;
 }
 
 /*# sourceMappingURL=style.css.map */

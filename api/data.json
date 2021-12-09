@@ -1,5 +1,12 @@
 [
   {
+    "id": 1,
+    "book_title": "Higels Hinges",
+    "author": "Tabatha Lauchlan",
+    "release_date": "25/07/1995",
+    "isbn_no": "551896144-8"
+  },
+  {
     "id": 2,
     "book_title": "Pulling John",
     "author": "Gasparo Older",
@@ -344,37 +351,9 @@
   },
   {
     "id": 51,
-    "book_title": "Test 2",
-    "author": "Author 2",
-    "release_date": "25/07/1982",
-    "isbn_no": "123412345-2"
-  },
-  {
-    "id": 52,
-    "book_title": "Test 2",
-    "author": "Author 2",
-    "release_date": "25/07/1982",
-    "isbn_no": "123412345-2"
-  },
-  {
-    "id": 53,
-    "book_title": "Test 2",
-    "author": "Author 2",
-    "release_date": "25/07/1982",
-    "isbn_no": "123412345-2"
-  },
-  {
-    "id": 54,
-    "book_title": "Test 2",
-    "author": "Author 2",
-    "release_date": "25/07/1982",
-    "isbn_no": "123412345-2"
-  },
-  {
-    "id": 55,
-    "book_title": "Test 2",
-    "author": "Author 2",
-    "release_date": "25/07/1982",
+    "book_title": "Carte Noua",
+    "author": "Test",
+    "release_date": "13/12/2010",
     "isbn_no": "123412345-2"
   }
 ]
