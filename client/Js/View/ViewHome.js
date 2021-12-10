@@ -94,34 +94,57 @@ export default class ViewHome{
         }
     }
 
-    addBook = async (e)=>{
+addBook = async (e)=>{
+    
+    e.preventDefault();
+    let obj = e.target;
+
+    if(obj.id == "submitBtn"){
+
+        const bookTitle = document.getElementById('bookTitle');
+        const author = document.getElementById('author');
+        const releaseDate = document.getElementById('releaseDate');
+        const isbn = document.getElementById('isbn');
+
+        let btRegex = /^.+$/g;
+
+        let authorRegex = /^([A-Za-z]+)\s([A-Za-z]+)$/g;
+
+        let dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/g;
+
+        let isbnRegex = /^\d{9}\-(\X|[0-9])$/g;
+
         
-        e.preventDefault();
-        let obj = e.target;
-
-        if(obj.id == "submitBtn"){
-            
-
-            const bookTitle = document.getElementById('bookTitle');
-            const author = document.getElementById('author');
-            const releaseDate = document.getElementById('releaseDate');
-            const isbn = document.getElementById('isbn');
-
-            let d = releaseDate.value;
-            d = d.split('-');
-            let newD = `${d[2]}/${d[1]}/${d[0]}`;
-
+        if(bookTitle.value.trim().match(btRegex) !== null){
             this.book.book_title = bookTitle.value.trim();
-            this.book.author = author.value.trim();
-            this.book.release_date = newD;
-            this.book.isbn_no = isbn.value.trim();
-
-            const dataApi = new Data();
-            await dataApi.addNewBook(this.book);
-            this.addNewBookFunction();
+            
+        } else{
+            alert("Please input the book title!")
         }
-        
+        if(author.value.trim().match(authorRegex) !== null){
+            this.book.author = author.value.trim();
+        }else{
+            alert('Please input the author`s first and last name!');
+        }
+
+
+        let d = releaseDate.value;
+        d = d.split('-');
+        let newD = `${d[2]}/${d[1]}/${d[0]}`;
+
+        //this.book.book_title = bookTitle.value.trim();
+        // this.book.author = author.value.trim();
+        this.book.release_date = newD;
+        this.book.isbn_no = isbn.value.trim();
+
+        //console.log(this.book);
+
+        // const dataApi = new Data();
+        // await dataApi.addNewBook(this.book);
+        // this.addNewBookFunction();
     }
+    
+}
 
     //+++ HTML Functions
 
@@ -187,7 +210,7 @@ export default class ViewHome{
         this.content.innerHTML = "";
         this.content.innerHTML = this.addNewBookHtml();
 
-        let addForm = document.querySelector('.addForm');
+        let addForm = document.querySelector('#addForm');
         addForm.addEventListener('click', this.addBook);
     }
 
@@ -287,26 +310,38 @@ export default class ViewHome{
 
     addNewBookHtml = () => {
         return `
-                <h2>Add new book</h2>
+                <h2>Add new book</h2>        
+                <!--<div class="errMessage">
+                    <h3>OOOPS!</h3>
+                    <p>Book Title is required!</p>
+                        <p>Author is required!</p>
+                        <p>Release Date is required!</p>
+                        <p>ISBN# is required!</p>
+                </div>-->
                 <div class="addForm">
-                    <form>
+                    <form id="addForm">
                         <label for="bookTitle">Book Title</label>
-                        <input type="text" id="bookTitle" name="bookTitle" placeholder="Book Title..">
+                        <input type="text" id="bookTitle" name="bookTitle" placeholder="Book Title.." required>
 
                         <label for="author">Author</label>
-                        <input type="text" id="author" name="lastname" placeholder="Author name..">
+                        <input type="text" id="author" name="lastname" placeholder="Author name.." required>
 
                         <label for="releaseDate">Release Date</label>
-                        <input type="date" id="releaseDate">
+                        <input type="date" id="releaseDate" required>
 
                         <label for="isbn">ISBN</label>
-                        <input type="text" id="isbn" name="isbn" placeholder="Enter ISBN..">
-                    
-                        <input id="submitBtn" type="submit" value="Add Book">
+                        <input type="text" id="isbn" name="isbn" placeholder="Enter ISBN.." required>
+
+                        <button id="submitBtn" type="submit">Add Book</button>
+                        
                     </form>
                 </div>
                 `;
+
+              //  <input id="submitBtn" type="submit" value="Add Book">
     }
+
+
 
     settings = () => {
         return `

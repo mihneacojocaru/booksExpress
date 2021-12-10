@@ -352,8 +352,22 @@
   {
     "id": 51,
     "book_title": "Carte Noua",
-    "author": "Test",
-    "release_date": "13/12/2010",
+    "author": "Autor Nou",
+    "release_date": "10/12/1999",
+    "isbn_no": "123412345-2"
+  },
+  {
+    "id": 52,
+    "book_title": "Test 2",
+    "author": "Author 2",
+    "release_date": "25/07/1982",
+    "isbn_no": "123412345-2"
+  },
+  {
+    "id": 53,
+    "book_title": "Test 2",
+    "author": "Author 2",
+    "release_date": "25/07/1982",
     "isbn_no": "123412345-2"
   }
 ]
