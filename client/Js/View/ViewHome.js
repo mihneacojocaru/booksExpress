@@ -107,17 +107,13 @@ addBook = async (e)=>{
         const isbn = document.getElementById('isbn');
 
         let btRegex = /^.+$/g;
-
         let authorRegex = /^([A-Za-z]+)\s([A-Za-z]+)$/g;
-
         let dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/g;
-
         let isbnRegex = /^\d{9}\-(\X|[0-9])$/g;
 
         
         if(bookTitle.value.trim().match(btRegex) !== null){
-            this.book.book_title = bookTitle.value.trim();
-            
+            this.book.book_title = bookTitle.value.trim();   
         } else{
             alert("Please input the book title!")
         }
@@ -126,22 +122,34 @@ addBook = async (e)=>{
         }else{
             alert('Please input the author`s first and last name!');
         }
+        if(releaseDate.value.match(dateRegex) !== null){
+            let d = releaseDate.value;
+            d = d.split('-');
+            let newD = `${d[2]}/${d[1]}/${d[0]}`;
+            this.book.release_date = newD;
+        }else{
+            alert('Please select a date!');
+        }
+        if(isbn.value.match(isbnRegex) !== null){
+            this.book.isbn_no = isbn.value.trim();
+        }else{
+            alert('Please enter a valid ISBN!');
+        }
 
+        
+        if(this.book.book_title.match(btRegex) !== null &&
+        this.book.author.match(authorRegex) !== null &&
+        this.book.release_date !== null &&
+        this.book.isbn_no.match(isbnRegex) !== null
+        ){
+            const dataApi = new Data();
+            await dataApi.addNewBook(this.book);
+            this.addNewBookFunction();
 
-        let d = releaseDate.value;
-        d = d.split('-');
-        let newD = `${d[2]}/${d[1]}/${d[0]}`;
-
-        //this.book.book_title = bookTitle.value.trim();
-        // this.book.author = author.value.trim();
-        this.book.release_date = newD;
-        this.book.isbn_no = isbn.value.trim();
-
-        //console.log(this.book);
-
-        // const dataApi = new Data();
-        // await dataApi.addNewBook(this.book);
-        // this.addNewBookFunction();
+        }else{
+            alert("Something went wrong!");
+        }
+        
     }
     
 }

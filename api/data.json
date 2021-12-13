@@ -351,9 +351,9 @@
   },
   {
     "id": 51,
-    "book_title": "Carte Noua",
-    "author": "Autor Nou",
-    "release_date": "10/12/1999",
+    "book_title": "Test 1",
+    "author": "Author 1",
+    "release_date": "25/07/1982",
     "isbn_no": "123412345-2"
   },
   {
@@ -365,9 +365,9 @@
   },
   {
     "id": 53,
-    "book_title": "Test 2",
-    "author": "Author 2",
-    "release_date": "25/07/1982",
+    "book_title": "New Book",
+    "author": "New Author",
+    "release_date": "12/10/1991",
     "isbn_no": "123412345-2"
   }
 ]
