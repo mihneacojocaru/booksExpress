@@ -605,6 +605,11 @@ input[type=text], input[type=date], select {
   margin: 10px 0;
 }
 
+.warningMsg {
+  color: red;
+  margin-left: 1em;
+}
+
 .updateInput {
   max-width: 350px;
 }

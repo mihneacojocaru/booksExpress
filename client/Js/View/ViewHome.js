@@ -1,4 +1,5 @@
 import Data from "../data.js";
+import { checkBookTitle, checkAuthor, checkDate, checkISBN } from "../helpers.js";
 
 export default class ViewHome{
 
@@ -94,65 +95,23 @@ export default class ViewHome{
         }
     }
 
-addBook = async (e)=>{
-    
-    e.preventDefault();
-    let obj = e.target;
-
-    if(obj.id == "submitBtn"){
-
-        const bookTitle = document.getElementById('bookTitle');
-        const author = document.getElementById('author');
-        const releaseDate = document.getElementById('releaseDate');
-        const isbn = document.getElementById('isbn');
-
-        let btRegex = /^.+$/g;
-        let authorRegex = /^([A-Za-z]+)\s([A-Za-z]+)$/g;
-        let dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/g;
-        let isbnRegex = /^\d{9}\-(\X|[0-9])$/g;
-
+    addBook = async (e)=>{
         
-        if(bookTitle.value.trim().match(btRegex) !== null){
-            this.book.book_title = bookTitle.value.trim();   
-        } else{
-            alert("Please input the book title!")
-        }
-        if(author.value.trim().match(authorRegex) !== null){
-            this.book.author = author.value.trim();
-        }else{
-            alert('Please input the author`s first and last name!');
-        }
-        if(releaseDate.value.match(dateRegex) !== null){
-            let d = releaseDate.value;
-            d = d.split('-');
-            let newD = `${d[2]}/${d[1]}/${d[0]}`;
-            this.book.release_date = newD;
-        }else{
-            alert('Please select a date!');
-        }
-        if(isbn.value.match(isbnRegex) !== null){
-            this.book.isbn_no = isbn.value.trim();
-        }else{
-            alert('Please enter a valid ISBN!');
-        }
+        e.preventDefault();
+        let obj = e.target;
 
-        
-        if(this.book.book_title.match(btRegex) !== null &&
-        this.book.author.match(authorRegex) !== null &&
-        this.book.release_date !== null &&
-        this.book.isbn_no.match(isbnRegex) !== null
-        ){
-            const dataApi = new Data();
-            await dataApi.addNewBook(this.book);
-            this.addNewBookFunction();
-
-        }else{
-            alert("Something went wrong!");
+        if(obj.id == "submitBtn"){
+            if(Object.keys(this.book).length == 4){
+                alert('Book added successfuly!')
+                const dataApi = new Data();
+                await dataApi.addNewBook(this.book);
+                this.addNewBookFunction();
+            }else{
+                alert('Please fill up the form corectly!');
+            }
         }
         
     }
-    
-}
 
     //+++ HTML Functions
 
@@ -218,8 +177,60 @@ addBook = async (e)=>{
         this.content.innerHTML = "";
         this.content.innerHTML = this.addNewBookHtml();
 
+        const bookTitle = document.getElementById("bookTitle");
+        const author = document.getElementById("author");
+        const releaseDate = document.getElementById("releaseDate");
+        const isbn = document.getElementById("isbn");
+
+        const btWarning = document.querySelector('.wMsg1');
+        const authorWarning = document.querySelector('.wMsg2');
+        const rdWarning = document.querySelector('.wMsg3');
+        const isbnWarning = document.querySelector('.wMsg4');
+
+        bookTitle.addEventListener('input', ()=>{
+            let info = checkBookTitle(bookTitle.value.trim());
+            if(info == 'Book Title cannot be empty'){
+                btWarning.innerHTML = info;
+            }else{
+                btWarning.innerHTML = "";
+                this.book.book_title = info;
+            }
+        });
+
+        author.addEventListener('input', ()=>{
+            let info = checkAuthor(author.value.trim());
+            if(info == 'Author name must have the form "LastName FirstName"!'){
+                authorWarning.innerHTML = info;
+            }else{
+                authorWarning.innerHTML = '';
+                this.book.author = info;
+            }
+        });
+
+        releaseDate.addEventListener('input', (e)=>{
+            let info = checkDate(releaseDate.value);
+            if(info == 'Please fill out a valid date'){
+                rdWarning.innerHTML = info;
+            }else{
+                rdWarning.innerHTML = '';
+                this.book.release_date = info;
+            }
+        });
+
+        isbn.addEventListener('input', ()=>{
+            let info = checkISBN(isbn.value.trim());
+            if(info == 'ISBN Number must have the form: 123456789-0'){
+                isbnWarning.innerHTML = info;
+            }else{
+                isbnWarning.innerHTML = '';
+                this.book.isbn_no = info;
+            }
+        });
+
         let addForm = document.querySelector('#addForm');
         addForm.addEventListener('click', this.addBook);
+
+
     }
 
     settingsFunction = () => {
@@ -328,16 +339,16 @@ addBook = async (e)=>{
                 </div>-->
                 <div class="addForm">
                     <form id="addForm">
-                        <label for="bookTitle">Book Title</label>
+                        <label for="bookTitle">Book Title <span class ="warningMsg wMsg1"></span></label>
                         <input type="text" id="bookTitle" name="bookTitle" placeholder="Book Title.." required>
 
-                        <label for="author">Author</label>
+                        <label for="author">Author <span class ="warningMsg wMsg2"></span></label>
                         <input type="text" id="author" name="lastname" placeholder="Author name.." required>
 
-                        <label for="releaseDate">Release Date</label>
+                        <label for="releaseDate">Release Date <span class ="warningMsg wMsg3"></span></label>
                         <input type="date" id="releaseDate" required>
 
-                        <label for="isbn">ISBN</label>
+                        <label for="isbn">ISBN <span class ="warningMsg wMsg4"></span></label>
                         <input type="text" id="isbn" name="isbn" placeholder="Enter ISBN.." required>
 
                         <button id="submitBtn" type="submit">Add Book</button>
